@@ -7,7 +7,7 @@ echo "It is not called by the Jenkins. You should also not use it to patch or up
 echo "================================================================================================="
 echo ""
 
-VERSION=v2-full
+VERSION=v2-custom-base
 # adding "_dev" to the project to avoid to affect negatively the PROD docker repository
 PROJECT=cron-job
 REPOSITORY=suti12
@@ -24,7 +24,8 @@ set -e
 # build the new docker image
 #
 echo '>>> Building new image'
-pack build $REPOSITORY/$PROJECT:$VERSION --buildpack paketo-buildpacks/nodejs --builder paketobuildpacks/builder:full --clear-cache --verbose
-
+docker build -t my-custom-run-image-with-curl .  
+pack builder create my-custom-builder --config builder.toml  
+pack build $REPOSITORY/$PROJECT:$VERSION --buildpack paketo-buildpacks/nodejs --builder my-custom-builder --clear-cache --verbose
 echo '>>> Push new image'
 docker push $REPOSITORY/$PROJECT:$VERSION

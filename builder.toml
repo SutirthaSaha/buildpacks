@@ -1,0 +1,5 @@
+[stack]  
+id = "io.buildpacks.stacks.bionic"  
+build-image = "paketobuildpacks/build:base-cnb"  
+run-image = "my-custom-run-image-with-curl"  
+run-image-mirrors = ["gcr.io/paketo-buildpacks/run:base-cnb"]  
