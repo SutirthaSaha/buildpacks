@@ -1,0 +1,12 @@
+{
+  "name": "lifecycle",
+  "version": "1.0.0",
+  "description": "demo",
+  "scripts": {
+    "start": "node src/index.js",
+    "poststart": "curl -XPOST http://localhost:15020/quitquitquit",
+    "stop" : "node src/stop.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

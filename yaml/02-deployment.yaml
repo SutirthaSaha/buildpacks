@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-job
+  namespace: cron-job # Ensure this is the correct namespace
+  labels:
+    name: cron-job
+spec:
+  schedule: "0 * * * *"
+  suspend: true
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            name: cron-job
+          annotations:
+            proxy.istio.io/config: '{"holdApplicationUntilProxyStarts": true}'
+        spec:
+          containers:
+          - name: cron-job
+            image: suti12/cron-job:v2
+            imagePullPolicy: Always
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 30
