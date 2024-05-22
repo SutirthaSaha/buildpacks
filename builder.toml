@@ -1,0 +1,10 @@
+[[extensions]]
+id = "samples/curl"
+version = "0.0.1"
+uri = "../extensions/curl"
+
+[build]
+image = "paketobuildpacks/build:base-cnb"
+[run]
+[[run.images]]
+image = "paketobuildpacks/build:base-cnb"

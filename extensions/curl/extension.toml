@@ -1,0 +1,10 @@
+# Buildpack API version
+api = "0.10"
+
+# Extension ID and metadata
+[extension]
+id = "samples/curl"
+version = "0.0.1"
+name = "Curl Extension"
+homepage = "https://github.com/buildpacks/samples/tree/main/extensions/curl"
+description = "A simple extension that switches the runtime base image to `run-image-curl`, based on `curlimages/curl`"
