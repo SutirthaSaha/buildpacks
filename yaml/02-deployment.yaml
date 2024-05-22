@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: cron-job
-  namespace: cron-job # Ensure this is the correct namespace
+  namespace: ums-demo # Ensure this is the correct namespace
   labels:
     name: cron-job
 spec:
@@ -14,12 +14,18 @@ spec:
         metadata:
           labels:
             name: cron-job
-          annotations:
-            proxy.istio.io/config: '{"holdApplicationUntilProxyStarts": true}'
         spec:
           containers:
           - name: cron-job
-            image: suti12/cron-job:v2
+            image: suti12/cron-job:v2-full
             imagePullPolicy: Always
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop: ["ALL"]
+              runAsNonRoot: true
+              runAsUser: 1000
+              seccompProfile:
+                type: "RuntimeDefault"
           restartPolicy: Never
           terminationGracePeriodSeconds: 30
